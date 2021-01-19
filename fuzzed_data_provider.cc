@@ -252,8 +252,8 @@ int64_t FuzzedDataProvider::ConsumeSmallIntInRange(size_t n, uint64_t range) {
   size_t offset = 0;
 
   while (offset < n && (range >> offset) > 0 && remaining_bytes_ != 0) {
-    --remaining_bytes_;
-    result = (result << 8) | data_ptr_[remaining_bytes_];
+    result = (result << 8) | *data_ptr_;
+    Advance(1);
     offset += 8;
   }
 
